@@ -1,0 +1,101 @@
+/* index.css: global styles shared by every page. */
+
+/* Design tokens: change a color here and it updates everywhere */
+:root {
+  --bg: #ffffff;
+  --surface: #f6f6fe;
+  --text: #1c1b3a;
+  --muted: #6b6a85;
+  --border: #dedcf2;
+  --primary: #5b4bdb;       /* purple-blue accent */
+  --primary-hover: #4638c2;
+  --error: #d6336c;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(60, 50, 160, 0.10);
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+a { color: var(--primary); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--primary-hover); text-decoration: underline; }
+
+/* ---------- Navbar ---------- */
+.navbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 24px; border-bottom: 1px solid var(--border);
+}
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.15rem; color: var(--primary); }
+.logo:hover { text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: 18px; }
+.nav-cta { background: var(--primary); color: #fff; padding: 8px 16px; border-radius: 10px; transition: background .2s; }
+.nav-cta:hover { background: var(--primary-hover); color: #fff; text-decoration: none; }
+
+/* ---------- Page layout: centers the card ---------- */
+.page { min-height: calc(100vh - 66px); display: grid; place-items: center; padding: 24px 16px; background: var(--surface); }
+
+/* ---------- Card ---------- */
+.card {
+  width: 100%; max-width: 420px; background: #fff; padding: 36px 32px;
+  border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.card h1 { font-size: 1.6rem; margin-bottom: 4px; }
+.subtitle { color: var(--muted); margin-bottom: 24px; }
+.welcome { text-align: center; }
+.welcome .btn { width: auto; display: inline-flex; padding: 12px 28px; }
+
+/* ---------- Form fields ---------- */
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: .9rem; font-weight: 600; margin-bottom: 6px; }
+.field input {
+  width: 100%; padding: 11px 14px; font-size: 1rem; font-family: inherit;
+  border: 1px solid var(--border); border-radius: 10px; background: #fff;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(91, 75, 219, .18); }
+.input-error { border-color: var(--error) !important; }
+.error { display: block; color: var(--error); font-size: .85rem; margin-top: 5px; }
+
+/* Password field with the eye button inside it */
+.input-wrap { position: relative; }
+.input-wrap input { padding-right: 44px; }
+.toggle {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--muted); cursor: pointer; padding: 6px; border-radius: 8px;
+  display: flex; transition: color .2s;
+}
+.toggle:hover { color: var(--primary); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+  padding: 12px 18px; font-size: 1rem; font-weight: 600; font-family: inherit;
+  border: none; border-radius: 10px; cursor: pointer; transition: background .2s, transform .1s;
+}
+.btn:active { transform: scale(.98); }
+.btn-primary { background: var(--primary); color: #fff; margin-top: 8px; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-ghost { width: auto; padding: 8px 14px; background: none; color: var(--text); border: 1px solid var(--border); }
+.btn-ghost:hover { background: var(--surface); }
+
+.switch { text-align: center; margin-top: 22px; color: var(--muted); font-size: .95rem; }
+
+/* ---------- Keyboard focus + reduced motion ---------- */
+a:focus-visible, button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 480px) {
+  .card { padding: 28px 20px; }
+  .navbar { padding: 14px 16px; }
+}
+
+/* ---------- Server error banner + disabled buttons ---------- */
+.alert { background: #fff0f5; color: var(--error); border: 1px solid #f5c2d4; padding: 10px 14px; border-radius: 10px; font-size: .9rem; margin-bottom: 8px; }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
